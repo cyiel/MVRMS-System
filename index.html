@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motor Vehicle Rental Management System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="main.css">
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@2.1.5/dist/tesseract.min.js"></script>
+    <script src="https://unpkg.com/@zxing/library@0.18.6/umd/index.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- Homepage -->
+        <div id="homePage" class="page active">
+            <div class="hero">
+                <div class="hero-inner">
+                    <div class="hero-left">
+                        <h1 class="hero-title"><span class="accent">Looking</span> to<br>rent a vehicle</h1>
+                        <p class="hero-sub">Quickly find and book rental vehicles near you.</p>
+                    </div>
+                    <div class="hero-right">
+                        <header class="top-nav">
+                            <div class="nav-left">
+                                <button class="nav-btn nav-primary" onclick="goToLoginPage()">Log in</button>
+                                <button class="nav-btn nav-primary" onclick="showAbout()">About Us</button>
+                                <button class="nav-btn nav-primary" onclick="goToSignupPage()">Sign Up</button>
+                            </div>
+                        </header>
+                        <div class="hero-panel"></div>
+                        <img src="motcars.png" alt="Motor Cars" class="hero-image" style="background-color:#dff7f8; padding:18px; border-radius:12px; box-shadow:0 8px 20px rgba(0,0,0,0.08); display:block; max-width:100%; height:auto;">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Login Page -->
+        <div id="loginPage" class="page">
+            <div class="signup-wrapper">
+                <div class="signup-wrapper">
+                    <div class="signup-header-bar">
+                        <div class="header-content">
+                            <div class="header-left">
+                                <span class="header-icon">🚗</span>
+                                <div class="header-title-wrap">
+                                    <span class="header-main">Motor Vehicle Rental</span>
+                                </div>
+                            </div>
+                            <div class="header-nav">
+                                <a href="#" class="header-link">About Us</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Login Section -->
+                <div id="loginSection" class="auth-section active">
+                    <div class="login-wrapper">
+                        <div class="login-left-section">
+                            <div class="logo-container">
+                                <img src="bolos.png" alt="Login Form" class="logo-image">
+                                <h2 class="company-name">Login Form</h2>
+                                <p class="company-tagline">Motor/Vehicle Rental Services</p>
+                            </div>
+                        </div>
+
+                        <div class="login-right-section">
+                            <div class="login-card">
+                                <h1 class="login-title">Motor Vehicle Rental</h1>
+                                <p class="login-subtitle">Management System</p>
+
+                                <form id="loginForm" class="login-form">
+                                    <div class="form-input-group">
+                                        <label for="username" class="form-label">Username</label>
+                                        <input type="text" id="username" class="form-input" placeholder="Enter your username" required>
+                                    </div>
+
+                                    <div class="form-input-group">
+                                        <label for="password" class="form-label">Password</label>
+                                        <input type="password" id="password" class="form-input" placeholder="Enter your password" required>
+                                    </div>
+
+                                    <div class="form-input-group">
+                                        <label for="role" class="form-label">Select Role</label>
+                                        <select id="role" class="form-input" required>
+                                            <option value="">-- Select your role --</option>
+                                            <option value="client">Client</option>
+                                            <option value="admin">Admin</option>
+                                            <option value="staff">Staff</option>
+                                            <option value="driver">Driver</option>
+                                        </select>
+                                    </div>
+
+                                    <button type="submit" class="login-button">Login</button>
+                                </form>
+
+                                <!-- Signup CTA centered and styled -->
+                                <div class="auth-switch auth-switch-center">
+                                    <button type="button" class="signup-cta" onclick="switchToSignup()" aria-label="Sign up">
+                                        <span class="cta-text">Don't have an account?</span>
+                                        <span class="cta-action">Sign Up</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Added signup section with form -->
+                <!-- Signup Section -->
+                <div id="signupSection" class="auth-section">
+                    <div class="signup-wrapper">
+                        <div class="signup-header-bar">
+                            <div class="header-content">
+                                <div class="header-left">
+                                    <span class="header-icon">🚗</span>
+                                    <div class="header-title-wrap">
+                                        <span class="header-main">Motor Vehicle Rental</span>
+                                    </div>
+                                </div>
+                                <div class="header-nav">
+                                    <a href="#" class="header-link">Home</a>
+                                    <a href="#" class="header-link">About Us</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="signup-content">
+                            <div class="signup-left-section">
+                                <div class="signup-logo-container">
+                                    <img src="bolos.png" alt="Biking Bolos Logo" class="signup-logo-image">
+                                    <h2 class="signup-form-title">Signup Form</h2>
+                                </div>
+                            </div>
+
+                            <div class="signup-right-section">
+                                <div class="signup-form-card">
+                                    <form id="signupForm" class="signup-form">
+                                        <div class="form-input-group">
+                                            <label for="fullName" class="form-label">Full Name</label>
+                                            <input type="text" id="fullName" class="form-input" placeholder="Enter your full name" required>
+                                        </div>
+
+                                        <div class="form-input-group">
+                                            <label for="signupEmail" class="form-label">Email</label>
+                                            <input type="email" id="signupEmail" class="form-input" placeholder="Enter your email" required>
+                                        </div>
+
+                                        <div class="form-input-group">
+                                            <label for="phoneNumber" class="form-label">Phone Number</label>
+                                            <input type="tel" id="phoneNumber" class="form-input" placeholder="Enter your phone number" required>
+                                        </div>
+
+                                        <div class="form-input-group">
+                                            <label for="signupPassword" class="form-label">Password</label>
+                                            <input type="password" id="signupPassword" class="form-input" placeholder="Choose a password" required>
+                                            <small class="password-hint">Strength must be 8+ chars, 1 number</small>
+                                        </div>
+
+                                        <div class="form-input-group">
+                                            <label for="confirmPassword" class="form-label">Confirm Password</label>
+                                            <input type="password" id="confirmPassword" class="form-input" placeholder="Re-enter your password" required>
+                                        </div>
+
+                                        <div class="form-input-group checkbox-group">
+                                            <label class="checkbox-label">
+                                                <input type="checkbox" id="idAgreement" required>
+                                                <span class="checkbox-text">I agree to provide valid ID for verification.</span>
+                                            </label>
+                                        </div>
+
+                                        <div class="form-input-group checkbox-group">
+                                            <label class="checkbox-label">
+                                                <input type="checkbox" id="termsAgreement" required>
+                                                <span class="checkbox-text">By signing up, you agree to our Terms and Privacy Policy.</span>
+                                            </label>
+                                        </div>
+
+                                        <div class="signup-button-group">
+                                            <button type="button" class="btn-secondary-outline" onclick="switchToLogin()">Already have an account?</button>
+                                            <button type="submit" class="signup-button">Create Account</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Added footer for signup page -->
+                        <div class="signup-footer">
+                            <p>&copy; 2025 Rental Management System</p>
+                            <div class="footer-footer-links">
+                                <a href="#" class="footer-footer-link">Terms of Service</a>
+                                <a href="#" class="footer-footer-link">Privacy Policy</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Page -->
+        <div id="dashboardPage" class="page">
+            <div class="dashboard-layout">
+                <!-- Sidebar -->
+                <aside class="sidebar">
+                    <div class="sidebar-header">
+                        <img src="bolos.png" alt="Logo" class="sidebar-logo">
+                        <h2 class="sidebar-title">MVRS</h2>
+                        <p id="userRoleDisplay" class="role-badge">CLIENT</p>
+                    </div>
+
+                    <nav class="sidebar-navigation">
+                        <div class="nav-section">
+                            <h3 class="nav-title">Menu</h3>
+                            <ul id="navMenu" class="nav-list"></ul>
+                        </div>
+                    </nav>
+
+                    <div class="sidebar-footer">
+                        <button id="logoutBtn" class="logout-button">Logout</button>
+                    </div>
+                </aside>
+
+                <!-- Main Content -->
+                <main class="main-layout">
+                    <header class="main-header">
+                        <h1 id="pageTitle">Dashboard</h1>
+                        <div class="header-actions">
+                            <span id="currentUserDisplay" class="user-display">User</span>
+                            <div class="notification-icon">🔔</div>
+                        </div>
+                    </header>
+
+                    <div id="contentArea" class="content-wrapper"></div>
+
+                    <!-- Footer -->
+                    <footer class="main-footer">
+                        <div class="footer-bottom">
+                            <p>&copy; 2025 Rental Management System</p>
+                        </div>
+                    </footer>
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <!-- GCash Payment Modal -->
+    <div id="gcashModal" class="modal">
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <h2>GCash Payment</h2>
+                <button class="modal-close" onclick="closeGCashModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="payment-info-box">
+                    <p><strong>Booking ID:</strong> <span id="gcashBookingId"></span></p>
+                    <p><strong>Amount:</strong> ₱<span id="gcashAmount">0</span></p>
+                </div>
+
+                <div class="gcash-section">
+                    <div class="gcash-header">💳 GCash Payment</div>
+                    <p class="gcash-note">You will be redirected to GCash for payment</p>
+
+                    <div class="form-input-group">
+                        <label for="gcashPhone" class="form-label">GCash Phone Number</label>
+                        <input type="tel" id="gcashPhone" class="form-input" placeholder="09XX-XXX-XXXX" required>
+                    </div>
+
+                    <div class="form-input-group">
+                        <label for="gcashPin" class="form-label">GCash PIN</label>
+                        <input type="password" id="gcashPin" class="form-input" placeholder="Enter 4-digit PIN" maxlength="4" required>
+                    </div>
+                </div>
+
+                <div id="paymentSuccess" class="success-message" style="display: none;">
+                    <div class="success-icon">✓</div>
+                    <h3>Payment Successful!</h3>
+                    <p>Reference: <span id="gcashRef"></span></p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closeGCashModal()">Cancel</button>
+                <button class="btn-primary" onclick="processGCashPayment()">Pay Now</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ID Scanner Modal -->
+    <div id="idScannerModal" class="modal">
+        <div class="modal-dialog wide-modal">
+            <div class="modal-header">
+                <h2>ID Scanner - National ID</h2>
+                <button class="modal-close" onclick="closeIDScannerModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="scanner-tab-buttons">
+                    <button class="tab-button active" onclick="switchIDTab('camera'); startCameraScanning()">Camera Scan</button>
+                    <button class="tab-button" onclick="openUploadTabAndClick()">Upload Image</button>
+                </div>
+
+                <div id="cameraTab" class="scanner-content active">
+                    <div class="camera-area">
+                        <video id="videoElement" class="video-display" style="display: none;"></video>
+                        <div id="cameraPlaceholder" class="camera-placeholder">
+                            <div class="camera-icon">📷</div>
+                            <p>Click below to start camera</p>
+                        </div>
+                    </div>
+                    <div class="button-group">
+                        <button class="btn-primary" onclick="startCameraScanning()">Start Camera</button>
+                        <button class="btn-primary" id="captureBtn" onclick="captureIDPhoto()" style="display: none;">Capture</button>
+                        <button class="btn-secondary" id="stopBtn" onclick="stopCameraScanning()" style="display: none;">Stop</button>
+                    </div>
+                </div>
+
+                <div id="uploadTab" class="scanner-content" style="display: none;">
+                    <div class="upload-drop-area" onclick="document.getElementById('idFileInput').click()">
+                        <div class="upload-icon-large">📎</div>
+                        <p>Click the area or use the button below to upload your National ID image</p>
+                        <p class="small-text">PNG, JPG, JPEG up to 5MB</p>
+                    </div>
+                    <div class="upload-actions" style="margin-top:12px; text-align:right;">
+                        <button class="btn-primary" type="button" onclick="document.getElementById('idFileInput').click()">Upload Image</button>
+                    </div>
+                    <div style="margin-top:10px; display:flex; align-items:center; gap:8px;">
+                        <input type="checkbox" id="confirmNationalCheckbox" />
+                        <label for="confirmNationalCheckbox" style="font-size:13px; color:#333;">I confirm this uploaded document is a <strong>National ID</strong> (other IDs are not allowed)</label>
+                    </div>
+                    <input type="file" id="idFileInput" accept="image/*" style="display: none;" onchange="processIDImage(event)">
+                </div>
+
+                <div id="scannedDataBox" class="scanned-data-box" style="display: none;">
+                    <h3>Scanned Information</h3>
+                    <div class="scanned-image-wrap" style="text-align:center; margin-bottom:12px;">
+                        <img id="displayIDImage" src="" alt="Uploaded ID preview" style="max-width:320px; width:100%; border-radius:6px; border:1px solid var(--border-gray); display:none;" />
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">ID Number:</span>
+                        <span id="displayLicense" class="data-value"></span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">Name:</span>
+                        <span id="displayScannedName" class="data-value"></span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">Expiration:</span>
+                        <span id="displayScannedExpiry" class="data-value"></span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">Class:</span>
+                        <span id="displayScannedClass" class="data-value"></span>
+                    </div>
+                    <div id="validationMsg" class="validation-message"></div>
+                    
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closeIDScannerModal()">Cancel</button>
+                <button id="verifyIDBtn" class="btn-primary" onclick="verifyIDAuthenticity()">Verify</button>
+                <button id="confirmIDBtn" class="btn-primary" style="display:none; margin-left:8px;" onclick="confirmID()">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom confirmation modal for auto-detected authentic National ID -->
+    <div id="idConfirmModal" class="modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <h2>Confirm National ID</h2>
+                <button class="modal-close" onclick="closeIDConfirmModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <div style="display:flex; gap:12px; align-items:flex-start;">
+                    <div style="flex:0 0 140px;">
+                        <img id="confirmImagePreview" src="" alt="ID preview" style="width:140px; height:auto; border:1px solid var(--border-gray); border-radius:6px; display:block; object-fit:cover;" />
+                    </div>
+                    <div style="flex:1 1 auto;">
+                        <div style="margin-bottom:8px;"><strong>ID Number:</strong> <span id="confirmIDNumber"></span></div>
+                        <div style="margin-bottom:8px;"><strong>Name:</strong> <span id="confirmName"></span></div>
+                        <div style="margin-bottom:8px;"><strong>Expiry / DOB:</strong> <span id="confirmExpiry"></span></div>
+                        <div style="margin-bottom:8px;"><strong>Detected Type:</strong> <span id="confirmClass"></span></div>
+                        <div id="confirmHint" style="font-size:13px; color:#666; margin-top:6px;">The system detected this as a National ID and it appears authentic. Confirm to save.</div>
+                        <div id="confirmDetectionInfo" style="font-size:13px; color:#444; margin-top:8px;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closeIDConfirmModal()">Cancel</button>
+                <button id="confirmAutoBtn" class="btn-primary" onclick="confirmID()">Confirm and Save</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="backend.js"></script>
+    <script src="auth.js"></script>
+    <script src="payment.js"></script>
+    <script src="id-scanner.js"></script>
+    <script src="client-dashboard.js"></script>
+    <script src="admin-dashboard.js"></script>
+    <script src="staff-dashboard.js"></script>
+    <script src="driver-dashboard.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
